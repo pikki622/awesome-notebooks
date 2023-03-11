@@ -153,7 +153,7 @@ def main(key, token,board_id,  export=False):
         df.to_csv(name)
     elif export == "xls":
         name = "trello-export.xlsx"
-        df.to_excel(name) 
+        df.to_excel(name)
     if name:
-        print("Exported to : "+ name) 
+        print(f"Exported to : {name}")
     return df

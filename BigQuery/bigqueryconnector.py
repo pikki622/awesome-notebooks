@@ -28,10 +28,7 @@ class BigQueryConnector:
         try:
             df = self.connection.query(query).to_dataframe()
 
-            if not df.empty:
-                return df
-            else:
-                return True
+            return True if df.empty else df
         except Exception as e:
             self._logger.error(e)
             return False

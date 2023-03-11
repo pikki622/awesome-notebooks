@@ -46,18 +46,22 @@ class ElasticsearchConnector:
 	def save_data(self,parameters,data):
 		print("Saving data to Elasticsearch")
 		try:
-			resultset = self.connection.index(index=parameters.get('index',None),doc_type=parameters.get('type',None),body=data)
-			return resultset
+			return self.connection.index(
+				index=parameters.get('index', None),
+				doc_type=parameters.get('type', None),
+				body=data,
+			)
 		except TransportError as e:
 			print("Unable to save data to elasticsearch. Please check your connection credentials")
 
 	def search_data(self,parameters,query,search_type='search'):
 		# import pdb;pdb.set_trace()
 		print("Fetching data from Elasticsearch server")
-		if(search_type == 'search'):
+		if (search_type == 'search'):
 			try:
-				resultset = self.connection.search(index=parameters.get('index',None), body=query[0])
-				return resultset
+				return self.connection.search(
+					index=parameters.get('index', None), body=query[0]
+				)
 			except TransportError as e:
 				print("Unable to search data. Please check your query and try again")
 			except AttributeError as e:
